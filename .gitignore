@@ -1,0 +1,21 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.log
+
+# Data files (don't commit user data)
+*.json
+appsettings.Development.json
+
+# React
+client/node_modules/
+client/dist/
+client/.env
+client/.env.local
+
+# OS
+.DS_Store
+Thumbs.db
