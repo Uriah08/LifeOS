@@ -4,6 +4,7 @@ using LifeOS.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LifeOS.Infrastructure.Migrations
 {
     [DbContext(typeof(LifeOSDbContext))]
-    partial class LifeOSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260616015808_AddTaskItem")]
+    partial class AddTaskItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,9 +40,6 @@ namespace LifeOS.Infrastructure.Migrations
                     b.Property<DateTime?>("DueDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
 
@@ -55,6 +55,9 @@ namespace LifeOS.Infrastructure.Migrations
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("isArchived")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

@@ -19,6 +19,17 @@ public class AuthService : IAuthService
         _config = config;
     }
 
+    public async Task<AuthResult> LoginAsync(LoginRequest request)
+    {
+        var user = await _userRepository.GetByEmailAsync(request.Email);
+        if (user == null) throw new Exception("User not found.");
+
+        var isValid = BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash);
+        if (!isValid) throw new Exception("Invalid password.");
+
+        return GenerateToken(user);
+    }
+
     public async Task<AuthResult> RegisterAsync(RegisterRequest request)
     {
         var exists = await _userRepository.ExistsAsync(request.Email);
